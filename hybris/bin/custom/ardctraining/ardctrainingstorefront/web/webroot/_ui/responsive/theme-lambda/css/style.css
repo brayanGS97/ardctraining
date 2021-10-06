@@ -4873,11 +4873,11 @@ a.label:focus {
   background-color: #5e5e5e;
 }
 .label-primary {
-  background-color: #0068b3;
+  background-color: #008000;
 }
 .label-primary[href]:hover,
 .label-primary[href]:focus {
-  background-color: #004a80;
+  background-color: #004d00;
 }
 .label-success {
   background-color: #5cb85c;
@@ -18566,6 +18566,23 @@ select[multiple].input-sm {
     overflow: hidden;
     height: 320px;
   }
+}
+.product-details__product-custom-labels {
+  display: block;
+  margin-bottom: 10px;
+}
+.product-details__product-custom-labels__item {
+  font-size: 1em;
+  color: white;
+}
+.product-details__product-custom-labels__item.primary {
+  background-color: #008000;
+}
+.product-details__product-custom-labels__item.secondary {
+  background-color: #0000ff;
+}
+.product-details__product-custom-labels__item.alternative {
+  background-color: #ff0000;
 }
 .skip,
 .skiptocontent,

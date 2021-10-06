@@ -1,0 +1,12 @@
+$catalog = electronicsProductCatalog
+$version = Online
+$catalogVersion = catalogVersion(catalog(id)[default=$catalog], version[default=$version])[default=$catalog:$version]
+
+
+INSERT_UPDATE CustomProductLabel; customer(uid)[unique = true]; product(code, catalogVersion(catalog(id),version))[unique = true]; label[unique = true]; validityDate[dateformat = yyyy.MM.dd]; labelType(code)
+                                ; bragarcia@externosdeloittemx.com     ; 300938:$catalog:$version                                       ; Camera              ; 2021.01.31                           ; PRIMARY
+                                ; bragarcia@externosdeloittemx.com     ; 300938:$catalog:$version                                       ; Custom1             ; 2021.01.31                           ; SECONDARY
+                                ; bragarcia@externosdeloittemx.com     ; 300938:$catalog:$version                                       ; Custom2             ; 2021.01.31                           ; ALTERNATIVE
+
+INSERT_UPDATE CustomProductLabel; customer(uid)[unique = true]     ; product(code, catalogVersion(catalog(id), version))[unique = true]; label[unique = true]; validityDate[dateformat = yyyy.MM.dd]; labelType[translator = com.ardctraining.core.data.batch.CustomProductLabelTypeTranslator]
+                                ; bragarcia@externosdeloittemx.com ; 300938:$catalog:$version                                          ; Custom3             ; 2021.12.31                           ; P

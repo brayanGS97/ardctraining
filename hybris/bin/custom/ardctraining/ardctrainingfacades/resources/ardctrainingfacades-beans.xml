@@ -6,10 +6,15 @@
 
 	<bean class="de.hybris.platform.commercefacades.product.data.ProductData">
 		<property name="genders" type="java.util.List&lt;com.ardctraining.facades.product.data.GenderData>"/>
+		<property name="labels" type="java.util.List&lt;com.ardctraining.facades.product.data.CustomProductLabelData>"/>
 	</bean>
 
 	<bean class="com.ardctraining.facades.product.data.GenderData">
 		<property name="code" type="String"/>
 		<property name="name" type="String"/>
+	</bean>
+	<bean class="com.ardctraining.facades.product.data.CustomProductLabelData">
+		<property name="label" type="java.lang.String"/>
+		<property name="type" type="java.lang.String"/>
 	</bean>
 </beans>
