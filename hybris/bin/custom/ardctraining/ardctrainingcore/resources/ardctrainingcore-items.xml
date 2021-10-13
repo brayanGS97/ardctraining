@@ -9,6 +9,7 @@
         <collectiontype code="SwatchColorSet" elementtype="SwatchColorEnum" autocreate="true" generate="true"
                         type="set"/>
         <collectiontype code="CustomLabelSet" elementtype="java.lang.String" autocreate="true" generate="true" type="set"/>
+        <collectiontype code="CustomerFeedbackSet" elementtype="java.lang.String" autocreate="true" generate="true" type="set"/>
     </collectiontypes>
 
     <enumtypes>
@@ -32,6 +33,14 @@
                 <value code="SECONDARY"/>
                 <value code="ALTERNATIVE"/>
         </enumtype>
+
+        <enumtype code="FeedbackStatusEnum" generate="true" autocreate="true" dynamic="true">
+            <value code="READ"/>
+            <value code="NOT_READ"/>
+            <value code="READ_PASTDUE"/>
+            <value code="PASTDUE"/>
+        </enumtype>
+
     </enumtypes>
 
     <itemtypes>
@@ -39,6 +48,44 @@
         <!-- Add your item definitions here -->
 
         <typegroup name="ardctraining">
+            <itemtype code="CustomerFeedback" autocreate="true" generate="true" jaloclass="com.ardctraining.core.jalo.CustomerFeedback">
+                <deployment table="custfeedback" typecode="10604"/>
+                <attributes>
+                    <attribute qualifier="customer" type="Customer">
+                        <modifiers read="true" write="true" />
+                        <persistence type="property" />
+                    </attribute>
+                    <attribute qualifier="read" type="java.lang.Boolean">
+                        <modifiers read="true" write="true" />
+                        <persistence type="property" />
+                        <defaultvalue>false</defaultvalue>
+                    </attribute>
+                    <attribute qualifier="subject" type="java.lang.String">
+                        <modifiers read="true" write="true" />
+                        <persistence type="property" />
+                    </attribute>
+                    <attribute qualifier="message" type="java.lang.String">
+                        <modifiers read="true" write="true" />
+                        <persistence type="property" />
+                    </attribute>
+                    <attribute qualifier="submittedDate" type="java.util.Date">
+                        <modifiers read="true" write="true" />
+                        <persistence type="property" />
+                    </attribute>
+                    <attribute qualifier="status" type="FeedbackStatusEnum">
+                        <modifiers read="true" write="false" />
+                        <persistence type="dynamic" attributeHandler="feedbackStatusHandler"/>
+                    </attribute>
+                </attributes>
+                <indexes>
+                    <index name="pk_custfeedback" unique="true">
+                        <key attribute="customer"/>
+                        <key attribute="subject"/>
+                        <key attribute="message"/>
+                    </index>
+                </indexes>
+            </itemtype>
+
             <itemtype code="CustomProductLabel" autocreate="true" generate="true" jaloclass="com.ardctraining.core.jalo.CustomProductLabel">
                 <deployment table="custprodlabel" typecode="10602"/>
                 <attributes>
@@ -88,6 +135,23 @@
                     </attribute>
                 </attributes>
             </itemtype>
+
+            <itemtype code="CustomerFeedbackEmailProcess"
+                      generate="true"
+                      autocreate="true"
+                      extends="StoreFrontProcess">
+                <attributes>
+                    <attribute qualifier="customerFeedback" type="CustomerFeedbackSet">
+                        <modifiers read="true" write="true"/>
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="language" type="Language">
+                        <modifiers read="true" write="true"/>
+                        <persistence type="property"/>
+                    </attribute>
+                </attributes>
+            </itemtype>
+
         </typegroup>
 
         <typegroup name="Apparel">
@@ -159,6 +223,5 @@
                 </attributes>
             </itemtype>
         </typegroup>
-
     </itemtypes>
 </items>

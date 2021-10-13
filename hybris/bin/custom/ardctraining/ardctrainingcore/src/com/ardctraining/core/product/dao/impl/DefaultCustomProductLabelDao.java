@@ -21,6 +21,8 @@ import org.apache.log4j.Logger;
 public class DefaultCustomProductLabelDao implements CustomProductLabelDao {
 
 
+    private Logger LOG= Logger.getLogger(DefaultCustomProductLabelDao.class);
+
     private FlexibleSearchService flexibleSearchService;
     private static final String SELECT=
             "SELECT {" + ItemModel.PK + "}" +
@@ -93,6 +95,8 @@ public class DefaultCustomProductLabelDao implements CustomProductLabelDao {
         if (Objects.nonNull(result) && CollectionUtils.isNotEmpty(result.getResult())){
             return result.getResult();
         }
+        LOG.warn("unable to find results for custom product labels");
         return Collections.emptyList();
     }
+
 }

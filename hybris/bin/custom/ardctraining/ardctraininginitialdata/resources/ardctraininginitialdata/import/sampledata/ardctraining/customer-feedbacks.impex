@@ -1,0 +1,2 @@
+INSERT_UPDATE CustomerFeedback; customer(uid)[unique = true]      ; read[default = false]; subject[unique = true]; message[unique = true]; submittedDate[dateformat = yyyy.MM.dd]; status
+                              ; bragarcia@externosdeloittemx.com;                      ; saludo ; hola   ; 2021.12.31                            ;

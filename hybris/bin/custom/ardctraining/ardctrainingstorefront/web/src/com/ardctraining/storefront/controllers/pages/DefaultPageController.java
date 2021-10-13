@@ -28,7 +28,7 @@ import org.springframework.web.util.UrlPathHelper;
  * are not handled by other controllers.
  */
 @Controller
-@RequestMapping("/**")
+@RequestMapping()
 public class DefaultPageController extends AbstractPageController
 {
 	private static final String ERROR_CMS_PAGE = "notFound";

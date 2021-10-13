@@ -206,8 +206,36 @@
 		  parent="variantCommerceSearchResultProductPopulator">
 		<property name="userService" ref="userService"/>
 	</bean>
+
 	<bean id="customProductLabelCleanupEmailContext" class="com.ardctraining.facades.process.email.context.CustomProductLabelCleanupEmailContext"
 	parent="abstractEmailContext">
 		<property name="configurationService" ref="configurationService"/>
+	</bean>
+
+	<alias name="defaultCustomerFeedbackPopulator" alias="customerFeedbackPopulator"/>
+	<bean id="defaultCustomerFeedbackPopulator" class="com.ardctraining.facades.populators.CustomerFeedbackPopulator"/>
+
+	<alias name="defaultCustomerFeedbackConverter" alias="customerFeedbackConverter"/>
+	<bean id="defaultCustomerFeedbackConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="com.ardctraining.facades.feedback.CustomerFeedbackData"/>
+		<property name="populators">
+			<list>
+				<ref bean="customerFeedbackPopulator"/>
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultArdctrainingFeedbackFacade" alias="feedbackFacade"/>
+	<bean id="defaultArdctrainingFeedbackFacade" class="com.ardctraining.facades.feedback.impl.DefaultArdctrainingFeedbackFacade" parent="defaultCustomerFacade">
+		<property name="customerFeedbackService" ref="customerFeedbackService"/>
+		<property name="customerFeedbackConverter" ref="customerFeedbackConverter"/>
+		<property name="businessProcessService" ref="businessProcessService"/>
+		<property name="timeService" ref="timeService"/>
+		<property name="baseSiteService" ref="baseSiteService"/>
+	</bean>
+
+	<bean id="customerFeedbackEmailContext" class="com.ardctraining.facades.process.email.context.CustomerFeedbackEmailContext"
+		  parent="abstractEmailContext">
+		<property name="userService" ref="userService"/>
 	</bean>
 </beans>
